@@ -60,6 +60,7 @@ public interface CalendarBookingService extends BaseService, InvokableService {
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
+	@Override
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
@@ -139,6 +140,14 @@ public interface CalendarBookingService extends BaseService, InvokableService {
 	public void invokeTransition(long calendarBookingId,
 		java.lang.String transitionName,
 		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void moveCalendarBookingToTrash(long calendarBookingId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void restoreCalendarBookingFromTrash(long calendarBookingId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -67,8 +67,13 @@ import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
+import com.liferay.portlet.social.service.SocialActivityCounterLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.persistence.SocialActivityCounterPersistence;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.trash.service.TrashEntryLocalService;
+import com.liferay.portlet.trash.service.TrashEntryService;
+import com.liferay.portlet.trash.service.persistence.TrashEntryPersistence;
 
 import java.io.Serializable;
 
@@ -105,6 +110,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public CalendarBooking addCalendarBooking(CalendarBooking calendarBooking)
 		throws SystemException {
 		calendarBooking.setNew(true);
@@ -118,6 +124,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @param calendarBookingId the primary key for the new calendar booking
 	 * @return the new calendar booking
 	 */
+	@Override
 	public CalendarBooking createCalendarBooking(long calendarBookingId) {
 		return calendarBookingPersistence.create(calendarBookingId);
 	}
@@ -131,6 +138,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public CalendarBooking deleteCalendarBooking(long calendarBookingId)
 		throws PortalException, SystemException {
 		return calendarBookingPersistence.remove(calendarBookingId);
@@ -145,12 +153,14 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public CalendarBooking deleteCalendarBooking(
 		CalendarBooking calendarBooking)
 		throws PortalException, SystemException {
 		return calendarBookingPersistence.remove(calendarBooking);
 	}
 
+	@Override
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
@@ -165,6 +175,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
@@ -184,6 +195,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
@@ -205,6 +217,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -219,11 +232,13 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return calendarBookingPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	@Override
 	public CalendarBooking fetchCalendarBooking(long calendarBookingId)
 		throws SystemException {
 		return calendarBookingPersistence.fetchByPrimaryKey(calendarBookingId);
@@ -237,11 +252,13 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @throws PortalException if a calendar booking with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public CalendarBooking getCalendarBooking(long calendarBookingId)
 		throws PortalException, SystemException {
 		return calendarBookingPersistence.findByPrimaryKey(calendarBookingId);
 	}
 
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException, SystemException {
 		return calendarBookingPersistence.findByPrimaryKey(primaryKeyObj);
@@ -256,6 +273,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @throws PortalException if a matching calendar booking could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public CalendarBooking getCalendarBookingByUuidAndGroupId(String uuid,
 		long groupId) throws PortalException, SystemException {
 		return calendarBookingPersistence.findByUUID_G(uuid, groupId);
@@ -273,6 +291,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @return the range of calendar bookings
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<CalendarBooking> getCalendarBookings(int start, int end)
 		throws SystemException {
 		return calendarBookingPersistence.findAll(start, end);
@@ -284,6 +303,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @return the number of calendar bookings
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getCalendarBookingsCount() throws SystemException {
 		return calendarBookingPersistence.countAll();
 	}
@@ -296,6 +316,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public CalendarBooking updateCalendarBooking(
 		CalendarBooking calendarBooking) throws SystemException {
 		return calendarBookingPersistence.update(calendarBooking);
@@ -975,6 +996,100 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 		this.socialActivityPersistence = socialActivityPersistence;
 	}
 
+	/**
+	 * Returns the social activity counter local service.
+	 *
+	 * @return the social activity counter local service
+	 */
+	public SocialActivityCounterLocalService getSocialActivityCounterLocalService() {
+		return socialActivityCounterLocalService;
+	}
+
+	/**
+	 * Sets the social activity counter local service.
+	 *
+	 * @param socialActivityCounterLocalService the social activity counter local service
+	 */
+	public void setSocialActivityCounterLocalService(
+		SocialActivityCounterLocalService socialActivityCounterLocalService) {
+		this.socialActivityCounterLocalService = socialActivityCounterLocalService;
+	}
+
+	/**
+	 * Returns the social activity counter persistence.
+	 *
+	 * @return the social activity counter persistence
+	 */
+	public SocialActivityCounterPersistence getSocialActivityCounterPersistence() {
+		return socialActivityCounterPersistence;
+	}
+
+	/**
+	 * Sets the social activity counter persistence.
+	 *
+	 * @param socialActivityCounterPersistence the social activity counter persistence
+	 */
+	public void setSocialActivityCounterPersistence(
+		SocialActivityCounterPersistence socialActivityCounterPersistence) {
+		this.socialActivityCounterPersistence = socialActivityCounterPersistence;
+	}
+
+	/**
+	 * Returns the trash entry local service.
+	 *
+	 * @return the trash entry local service
+	 */
+	public TrashEntryLocalService getTrashEntryLocalService() {
+		return trashEntryLocalService;
+	}
+
+	/**
+	 * Sets the trash entry local service.
+	 *
+	 * @param trashEntryLocalService the trash entry local service
+	 */
+	public void setTrashEntryLocalService(
+		TrashEntryLocalService trashEntryLocalService) {
+		this.trashEntryLocalService = trashEntryLocalService;
+	}
+
+	/**
+	 * Returns the trash entry remote service.
+	 *
+	 * @return the trash entry remote service
+	 */
+	public TrashEntryService getTrashEntryService() {
+		return trashEntryService;
+	}
+
+	/**
+	 * Sets the trash entry remote service.
+	 *
+	 * @param trashEntryService the trash entry remote service
+	 */
+	public void setTrashEntryService(TrashEntryService trashEntryService) {
+		this.trashEntryService = trashEntryService;
+	}
+
+	/**
+	 * Returns the trash entry persistence.
+	 *
+	 * @return the trash entry persistence
+	 */
+	public TrashEntryPersistence getTrashEntryPersistence() {
+		return trashEntryPersistence;
+	}
+
+	/**
+	 * Sets the trash entry persistence.
+	 *
+	 * @param trashEntryPersistence the trash entry persistence
+	 */
+	public void setTrashEntryPersistence(
+		TrashEntryPersistence trashEntryPersistence) {
+		this.trashEntryPersistence = trashEntryPersistence;
+	}
+
 	public void afterPropertiesSet() {
 		Class<?> clazz = getClass();
 
@@ -994,6 +1109,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
+	@Override
 	public String getBeanIdentifier() {
 		return _beanIdentifier;
 	}
@@ -1003,10 +1119,12 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 *
 	 * @param beanIdentifier the Spring bean ID for this bean
 	 */
+	@Override
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
 	}
 
+	@Override
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		Thread currentThread = Thread.currentThread();
@@ -1126,6 +1244,16 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	protected SocialActivityLocalService socialActivityLocalService;
 	@BeanReference(type = SocialActivityPersistence.class)
 	protected SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = SocialActivityCounterLocalService.class)
+	protected SocialActivityCounterLocalService socialActivityCounterLocalService;
+	@BeanReference(type = SocialActivityCounterPersistence.class)
+	protected SocialActivityCounterPersistence socialActivityCounterPersistence;
+	@BeanReference(type = TrashEntryLocalService.class)
+	protected TrashEntryLocalService trashEntryLocalService;
+	@BeanReference(type = TrashEntryService.class)
+	protected TrashEntryService trashEntryService;
+	@BeanReference(type = TrashEntryPersistence.class)
+	protected TrashEntryPersistence trashEntryPersistence;
 	private String _beanIdentifier;
 	private ClassLoader _classLoader;
 	private CalendarBookingLocalServiceClpInvoker _clpInvoker = new CalendarBookingLocalServiceClpInvoker();
