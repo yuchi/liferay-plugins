@@ -52,9 +52,6 @@ public class CalendarBookingTrashHandler extends BaseTrashHandler {
 		if (calendarBooking.isMasterBooking()) {
 			return true;
 		}
-		else if (calendarBooking.isDenied()) {
-			return true;
-		}
 		else {
 			return false;
 		}

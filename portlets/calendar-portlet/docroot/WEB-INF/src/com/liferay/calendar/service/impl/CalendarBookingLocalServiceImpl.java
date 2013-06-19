@@ -475,6 +475,12 @@ public class CalendarBookingLocalServiceImpl
 			long userId, long calendarBookingId)
 		throws PortalException, SystemException {
 
+		CalendarBooking calendarBooking = getCalendarBooking(calendarBookingId);
+
+		if (!calendarBooking.isMasterBooking()) {
+			return;
+		}
+
 		// Entry
 
 		TrashEntry trashEntry = trashEntryLocalService.getEntry(
