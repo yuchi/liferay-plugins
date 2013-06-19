@@ -46,15 +46,8 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetLinkPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
-<<<<<<< HEAD
-=======
-import com.liferay.portlet.social.service.SocialActivityCounterLocalService;
-import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityCounterPersistence;
->>>>>>> LPS-35264 Regenerate
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
-import com.liferay.portlet.trash.service.TrashEntryLocalService;
-import com.liferay.portlet.trash.service.TrashEntryService;
 import com.liferay.portlet.trash.service.persistence.TrashEntryPersistence;
 
 import java.io.Serializable;
@@ -1049,7 +1042,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 *
 	 * @return the social activity counter local service
 	 */
-	public SocialActivityCounterLocalService getSocialActivityCounterLocalService() {
+	public com.liferay.portlet.social.service.SocialActivityCounterLocalService getSocialActivityCounterLocalService() {
 		return socialActivityCounterLocalService;
 	}
 
@@ -1059,7 +1052,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @param socialActivityCounterLocalService the social activity counter local service
 	 */
 	public void setSocialActivityCounterLocalService(
-		SocialActivityCounterLocalService socialActivityCounterLocalService) {
+		com.liferay.portlet.social.service.SocialActivityCounterLocalService socialActivityCounterLocalService) {
 		this.socialActivityCounterLocalService = socialActivityCounterLocalService;
 	}
 
@@ -1087,7 +1080,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 *
 	 * @return the trash entry local service
 	 */
-	public TrashEntryLocalService getTrashEntryLocalService() {
+	public com.liferay.portlet.trash.service.TrashEntryLocalService getTrashEntryLocalService() {
 		return trashEntryLocalService;
 	}
 
@@ -1097,7 +1090,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 * @param trashEntryLocalService the trash entry local service
 	 */
 	public void setTrashEntryLocalService(
-		TrashEntryLocalService trashEntryLocalService) {
+		com.liferay.portlet.trash.service.TrashEntryLocalService trashEntryLocalService) {
 		this.trashEntryLocalService = trashEntryLocalService;
 	}
 
@@ -1106,7 +1099,7 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 *
 	 * @return the trash entry remote service
 	 */
-	public TrashEntryService getTrashEntryService() {
+	public com.liferay.portlet.trash.service.TrashEntryService getTrashEntryService() {
 		return trashEntryService;
 	}
 
@@ -1115,7 +1108,8 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	 *
 	 * @param trashEntryService the trash entry remote service
 	 */
-	public void setTrashEntryService(TrashEntryService trashEntryService) {
+	public void setTrashEntryService(
+		com.liferay.portlet.trash.service.TrashEntryService trashEntryService) {
 		this.trashEntryService = trashEntryService;
 	}
 
@@ -1292,14 +1286,14 @@ public abstract class CalendarBookingLocalServiceBaseImpl
 	protected com.liferay.portlet.social.service.SocialActivityLocalService socialActivityLocalService;
 	@BeanReference(type = SocialActivityPersistence.class)
 	protected SocialActivityPersistence socialActivityPersistence;
-	@BeanReference(type = SocialActivityCounterLocalService.class)
-	protected SocialActivityCounterLocalService socialActivityCounterLocalService;
+	@BeanReference(type = com.liferay.portlet.social.service.SocialActivityCounterLocalService.class)
+	protected com.liferay.portlet.social.service.SocialActivityCounterLocalService socialActivityCounterLocalService;
 	@BeanReference(type = SocialActivityCounterPersistence.class)
 	protected SocialActivityCounterPersistence socialActivityCounterPersistence;
-	@BeanReference(type = TrashEntryLocalService.class)
-	protected TrashEntryLocalService trashEntryLocalService;
-	@BeanReference(type = TrashEntryService.class)
-	protected TrashEntryService trashEntryService;
+	@BeanReference(type = com.liferay.portlet.trash.service.TrashEntryLocalService.class)
+	protected com.liferay.portlet.trash.service.TrashEntryLocalService trashEntryLocalService;
+	@BeanReference(type = com.liferay.portlet.trash.service.TrashEntryService.class)
+	protected com.liferay.portlet.trash.service.TrashEntryService trashEntryService;
 	@BeanReference(type = TrashEntryPersistence.class)
 	protected TrashEntryPersistence trashEntryPersistence;
 	private String _beanIdentifier;
