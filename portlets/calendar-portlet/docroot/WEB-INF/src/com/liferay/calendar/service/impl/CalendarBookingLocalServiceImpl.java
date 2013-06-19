@@ -883,12 +883,6 @@ public class CalendarBookingLocalServiceImpl
 					null);
 			}
 		}
-		else if (status == CalendarBookingWorkflowConstants.STATUS_DENIED) {
-			trashEntryLocalService.addTrashEntry(
-				userId, getResourceGroupId(calendarBooking),
-				CalendarBooking.class.getName(),
-				calendarBooking.getCalendarBookingId(), oldStatus, null, null);
-		}
 
 		return calendarBooking;
 	}
